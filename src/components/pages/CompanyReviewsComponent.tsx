@@ -398,15 +398,27 @@ class CompanyReviewsComponent extends React.Component<CompanyReviewsComponent.Pr
 
     render() {
         if (location.href.indexOf('search') == -1) {
-            $("<div id='btn-popup' class='vacancy-action vacancy-action_stretched'></div>").appendTo('.vacancy-actions_applicant');
+            if (location.href.indexOf('employer')) {
+                $("<div id='btn-popup' class='employer-sidebar-button'></div>").appendTo('.employer-sidebar__footer');
 
-            if (this.state.comments.length > 0) {
-                var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Отзывы: {this.state.comments.length}</button>
-            } else {
-                var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Оставить отзыв</button>
+                if (this.state.comments.length > 0) {
+                    var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Отзывы: {this.state.comments.length}</button>
+                } else {
+                    var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Оставить отзыв</button>
+                }
+
+                ReactDOM.render(btn, document.getElementById('btn-popup'));
+            } else if (location.href.indexOf('vacancy')) {
+                $("<div id='btn-popup' class='vacancy-action vacancy-action_stretched'></div>").appendTo('.vacancy-actions_applicant');
+
+                if (this.state.comments.length > 0) {
+                    var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Отзывы: {this.state.comments.length}</button>
+                } else {
+                    var btn = <button className="btn-o" onClick={() => {this.props.showPopup()}}>Оставить отзыв</button>
+                }
+
+                ReactDOM.render(btn, document.getElementById('btn-popup'));
             }
-
-            ReactDOM.render(btn, document.getElementById('btn-popup'));
         }
 
         if (this.state.showTop) {
